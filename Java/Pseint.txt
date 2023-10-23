@@ -1,0 +1,99 @@
+{Funcion  CalculoDesc ( precio,desc )
+	escribir "Su precio con el descuento aplicado es: " , precio*desc/100;
+Fin Funcion
+
+Algoritmo sin_titulo
+	definir precio, desc Como Real;
+	escribir "Ingrese un precio y un porcentaje de descuento";
+	leer precio;
+	leer desc;
+	CalculoDesc(precio,desc);
+FinAlgoritmo}
+{Funcion CheckPrimo ( int )
+	definir i Como Entero;
+	definir check Como Logico;
+	//i=2;
+	check = Verdadero;
+	
+	Para i=2 Hasta int-1 Con Paso 1  Hacer
+		Si (int MOD i) == 0 Entonces
+			escribir "No es primo";
+			check = falso;
+		FinSi
+	Fin Para
+	si (check <> falso) entonces
+		escribir "Su numero es primo";
+	FinSi
+Fin Funcion
+
+Algoritmo sin_titulo
+	definir int Como Entero;
+	Escribir "Ingrese un numero para ver si es primo: ";
+	leer int;
+	CheckPrimo(int);
+FinAlgoritmo}
+{Funcion  ConvertidorTemp ( temp )
+	definir f Como Real;
+	f= (temp * 9/5)+32;
+	Escribir "Su temperatura en Fahrenheit: ",f;
+Fin Funcion
+
+Algoritmo sin_titulo
+	definir temp Como Entero;
+	Escribir "Cual es la temperatura en Celsius: ";
+	leer temp;
+	ConvertidorTemp(temp);
+FinAlgoritmo}
+{Funcion int<-Factorial ( int )
+	definir i Como Entero;
+	i = int;
+	Si i==1 o i==0 Entonces
+		i=1;
+	SiNo
+		int = i * Factorial(i-1);
+	Fin Si
+Fin Funcion
+
+Algoritmo sintitulo
+	definir int ,resultado Como entero;
+	Escribir "Puedes ingresar un numero entero no negativo: ";
+	leer int;
+	resultado = Factorial(int);
+	escribir "EL resultado es: ",resultado;
+FinAlgoritmo}
+{Funcion esPalindromo ( palabra )
+	definir ad,at,coincidencias Como entero;
+	ad = 0;
+	at= longitud(palabra);
+	Para ad=0 Hasta Longitud(palabra)-1 Con Paso 1 Hacer
+		si Subcadena(palabra,ad,ad) == Subcadena(palabra,at-1,at-1) Entonces
+			coincidencias = coincidencias+1;
+		FinSi
+		//escribir Subcadena(palabra,ad,ad) ,"+", Subcadena(palabra,at-1,at-1);
+		at=at-1;
+	FinPara
+		si coincidencias = Longitud(palabra) Entonces
+			escribir "Es palindromo";
+		SiNo
+			escribir "No es palindromo";
+		FinSi
+Fin Funcion
+
+Algoritmo sin_titulo
+	definir palabra como caracter;
+	escribir "Ingrese una palabra para ver si es palindromo: ";
+	leer palabra;
+	esPalindromo(palabra);
+FinAlgoritmo}
+{Algoritmo sin_titulo
+	definir i,total,num Como Real;
+	escribir "Ingrese la cantidad de numeros que ingresara: ";
+	leer i;
+	Para i=1 Hasta i Con Paso 1 Hacer
+		escribir "Su numero ",i,": ";
+		leer num;
+		total = total +num;
+	Fin Para
+	escribir "Suma =",total;
+	escribir "Promedio=",total/i;
+FinAlgoritmo}
