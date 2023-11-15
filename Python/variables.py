@@ -1,84 +1,53 @@
 import random
 
-def imprimir_tablero(tablero):
-    """
-    Imprime el tablero actualizado.
-    """
-    for fila in tablero:
-        print("|".join(fila))
-        print("-" * 5)
+# Función para imprimir el tablero
+def print_board(board):
+    for row in board:
+        print(" ".join(row))
 
-def verificar_ganador(tablero, jugador):
-    """
-    Verifica si el jugador actual ha ganado.
-    """
-    # Verificar filas y columnas
-    for i in range(3):
-        if all(tablero[i][j] == jugador for j in range(3)) or all(tablero[j][i] == jugador for j in range(3)):
-            return True
+# Función para colocar el barco en el tablero
+def place_ship(board, ship_row, ship_col, direction):
+    if direction == "horizontal":
+        for i in range(3):
+            board[ship_row][ship_col + i] = "S"
+    elif direction == "vertical":
+        for i in range(3):
+            board[ship_row + i][ship_col] = "S"
 
-    # Verificar diagonales
-    if all(tablero[i][i] == jugador for i in range(3)) or all(tablero[i][2 - i] == jugador for i in range(3)):
-        return True
+# Función principal del juego
+def battleship_game():
+    # Crear un tablero de 5x5
+    board = [["O"] * 5 for _ in range(5)]
 
-    return False
+    # Imprimir el tablero inicial
+    print("Tablero de Batalla Naval:")
+    print_board(board)
 
-def tablero_lleno(tablero):
-    """
-    Verifica si el tablero está lleno.
-    """
-    return all(tablero[i][j] != ' ' for i in range(3) for j in range(3))
+    # Colocar el barco de tres casillas
+    ship_row = random.randint(0, 2)
+    ship_col = random.randint(0, 2)
+    direction = random.choice(["horizontal", "vertical"])
+    place_ship(board, ship_row, ship_col, direction)
 
-def jugar_tateti():
-    """
-    Función principal para jugar al ta-te-ti.
-    """
-    tablero = [[' ' for _ in range(3)] for _ in range(3)]
-    jugador = 'X'
-    computadora = 'O'
+    # Juego
+    for turn in range(3):
+        print(f"\nTurno {turn + 1}")
+        guess_row = int(input("Fila (0-4): "))
+        guess_col = int(input("Columna (0-4): "))
 
-    while True:
-        imprimir_tablero(tablero)
-
-        # Turno del jugador
-        fila = int(input("Ingrese el número de fila (0, 1, 2): "))
-        columna = int(input("Ingrese el número de columna (0, 1, 2): "))
-
-        if tablero[fila][columna] == ' ':
-            tablero[fila][columna] = jugador
+        # Verificar si el jugador ha acertado
+        if board[guess_row][guess_col] == "S":
+            print("¡Felicidades! ¡Hundiste el barco!")
+            break
         else:
-            print("Esa posición ya está ocupada. Intente de nuevo.")
-            continue
+            print("¡Agua! Inténtalo de nuevo.")
 
-        if verificar_ganador(tablero, jugador):
-            imprimir_tablero(tablero)
-            print("¡Felicidades! Has ganado.")
-            break
+        # Imprimir el tablero actualizado
+        board[guess_row][guess_col] = "X"
+        print_board(board)
 
-        if tablero_lleno(tablero):
-            imprimir_tablero(tablero)
-            print("El juego ha terminado en empate.")
-            break
+        if turn == 2:
+            print("\nFin del juego. ¡No hundiste el barco!")
 
-        # Turno de la computadora
-        print("Turno de la computadora:")
-        while True:
-            fila_computadora = random.randint(0, 2)
-            columna_computadora = random.randint(0, 2)
-
-            if tablero[fila_computadora][columna_computadora] == ' ':
-                tablero[fila_computadora][columna_computadora] = computadora
-                break
-
-        if verificar_ganador(tablero, computadora):
-            imprimir_tablero(tablero)
-            print("La computadora ha ganado. ¡Suerte la próxima vez!")
-            break
-
-        if tablero_lleno(tablero):
-            imprimir_tablero(tablero)
-            print("El juego ha terminado en empate.")
-            break
-
-if __name__ == "__main__":
-    jugar_tateti()
+# Iniciar el juego
+battleship_game()
