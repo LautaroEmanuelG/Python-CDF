@@ -38,9 +38,16 @@ def colocarBarcoCasilla(tablero, barco):
     col = 0
     print("Coloca tu Barco")
     while True:
-        casilla = input("¿En que casilla quieres colocarlo?\n(Ej:2-2 o 1 1)\n----->")
+        casilla = input("\n¿En que casilla quieres colocar la pieza?\n(Ej:2-2 o 1 1)\n----->")
         fila = int(casilla[0])
-        col = int(casilla[2])
+        casilla_str = list(casilla)
+        casilla_str.append("-")
+        print(casilla_str)
+        for num in "123456789":
+            if casilla_str[2] == num:
+                col = int(casilla_str[2])
+            elif casilla_str[1] == num:
+                col = int(casilla_str[1])
         print("fila: ",fila,"columna: ",col)
         if 0 <= fila <= 5 and 1 <= col <= 6:
             tablero[fila][col] = "|B|"
