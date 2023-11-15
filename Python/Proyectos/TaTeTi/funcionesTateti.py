@@ -114,10 +114,12 @@ def ganaste(tablero,jugador):
     return True
 
 def empate(tablero):
+    print("\n----------TA-TE-TI----------\n")
     imprimirTablero(tablero)
+    print("\n----------TA-TE-TI----------\n")
     print("""\n
 ----------------------------
-"Empate. ¿Un nuevo reto?"
+"EMPATE. ¿Un nuevo reto?"
 ----------------------------
 """)
     return True
