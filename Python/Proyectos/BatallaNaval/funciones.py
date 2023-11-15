@@ -114,26 +114,28 @@ def revisarCasilla(tableroContrario,jugadorContrario,vidaContrario):
             print(f"""
 ----------------------------\n
 AGUA!!! seguiremos intentando\n
-----------------------------\n
-{imprimirTablero(tableroContrario)}\n
+----------------------------\n""")
+            imprimirTablero(tableroContrario)
+            print("""
 ----------------------------\n
 Vida restante del enemigo: {vidaContrario}\n
 ----------------------------\n
 """)
-            return True
+            return vidaContrario
         elif tableroContrario[fila][col] == jugadorContrario:
             tableroContrario[fila][col] = "|X|"
             vidaContrario -= 1
             print(f"""
 ----------------------------\n
 HEMOS DADO A UN ENEMIGO AUUU\n
-----------------------------\n
-{imprimirTablero(tableroContrario)}\n
+----------------------------\n""")
+            imprimirTablero(tableroContrario)
+            print("""
 ----------------------------\n
 Vida restante del enemigo: {vidaContrario}\n
 ----------------------------\n
 """)
-            return True
+            return vidaContrario
         else:
             print("\n!!! ---- No es posible llegar hasta ahi, ¡Señor! ---- !!!\n")
             revisarCasilla(tableroContrario,jugadorContrario,vidaContrario)
@@ -170,7 +172,7 @@ def vamoAJuga(tablero1,tablero2,jugador1,jugador2,nombreJugador1,nombreJugador2,
     while True:
         #Turno jugador 1
         turnoJugador(tablero1,nombreJugador1)
-        revisarCasilla(tablero2,jugador2,vidaJugador2)
+        vidaJugador2 = revisarCasilla(tablero2,jugador2,vidaJugador2)
         if checkVida(tablero2,vidaJugador2):
         #if verificarGanador(vidaJugador2):
             ganaste(tablero2,nombreJugador1,nombreJugador2)
@@ -178,7 +180,7 @@ def vamoAJuga(tablero1,tablero2,jugador1,jugador2,nombreJugador1,nombreJugador2,
             
         #Turno jugador 2
         turnoJugador(tablero2,nombreJugador2)
-        revisarCasilla(tablero1,jugador1,vidaJugador1)
+        vidaJugador1 = revisarCasilla(tablero1,jugador1,vidaJugador1)
         if checkVida(tablero1,vidaJugador1):
         #if verificarGanador(vidaJugador1):
             ganaste(tablero1,nombreJugador2,nombreJugador1)
